@@ -1,0 +1,62 @@
+name: Regression Testing
+on: push
+jobs:
+  tox-lint:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        python-version:
+          - '3.12'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Dependencies
+        run: |
+          apt install -y adduser base-files bash bash-completion command-not-found cron debconf distro-info-data e2fsprogs fuse3 gettext-base hdparm keyutils libattr1:amd64 libaudit-common libc-bin libc6:amd64 libmagic1:amd64 libmecab2:amd64 libpam-runtime libpcre2-8-0:amd64 libpython3.12-stdlib:amd64 libsensors-config libtirpc-common locales login logrotate lsb-release ltrace mailcap man-db media-types multipath-tools nano ncurses-base netbase nftables openssl overlayroot procps python3-zope.interface python3.12 rsyslog screen sudo tar tzdata ucf unixodbc-common usb-modeswitch walinuxagent wget
+          pip install setuptools==80.9.0
+      - run: |
+          python -m pip install --upgrade pip
+      - run: |
+          pip install tox
+      - run: |
+          tox -e lint
+    env:
+      PYTHONHASHSEED: '2336453869'
+      PYTHONIOENCODING: utf-8
+      PYTHONNOUSERSITE: '1'
+  tox-matrix:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        python-version:
+          - '3.12'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Dependencies
+        run: |
+          apt install -y adduser base-files bash bash-completion ca-certificates command-not-found cron debconf distro-info-data e2fsprogs fuse3 gettext-base hdparm keyutils libattr1:amd64 libaudit-common libc-bin libc6:amd64 libmagic1:amd64 libmecab2:amd64 libpam-runtime libpcre2-8-0:amd64 libpython3.10-minimal:amd64 libpython3.10-stdlib:amd64 libpython3.12-stdlib:amd64 libsensors-config libtirpc-common locales login logrotate lsb-release ltrace mailcap man-db media-types multipath-tools nano ncurses-base netbase nftables openssl overlayroot procps python3-apport python3-minimal python3-zope.interface python3.10-minimal python3.12 rsyslog screen sudo tar tzdata ucf unixodbc-common usb-modeswitch walinuxagent wget
+          pip install setuptools==80.9.0
+      - run: |
+          python -m pip install --upgrade pip
+      - run: |
+          pip install tox
+          pip install tox-gh-actions
+      - run: |
+          tox
+    env:
+      COLUMNS: '254'
+      LC_CTYPE: C.UTF-8
+      LINES: '62'
+      PYTHONHASHSEED: '3895973723'
+      PYTHONIOENCODING: utf-8
+      PYTHONNOUSERSITE: '1'
+      TERM: xterm
