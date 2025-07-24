@@ -3,10 +3,10 @@
 
 # >>> IS TRIGGER
 on:
-    push:
+  push:
     branches:
       - reference
-#   pull_request:
+# pull_request:
 #     branches:
 #       - master
 #       - release/**
