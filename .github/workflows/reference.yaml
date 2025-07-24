@@ -2,7 +2,7 @@
 # name: Regression Testing
 
 # >>> IS TRIGGER
-# on:
+on:
 #   pull_request:
 #     branches:
 #       - master
