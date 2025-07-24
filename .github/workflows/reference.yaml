@@ -13,9 +13,9 @@
 #       - '**/*.py'
 #       - '**/*.ini'
 #       - '**/*.toml'
-#   push:
-#     branches:
-#       - master
+  push:
+    branches:
+      - reference
 #       - release/**
 #     paths:
 #       - '.github/workflows/regression.yml'
