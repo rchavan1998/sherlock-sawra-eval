@@ -3,6 +3,9 @@
 
 # >>> IS TRIGGER
 on:
+    push:
+    branches:
+      - reference
 #   pull_request:
 #     branches:
 #       - master
@@ -13,9 +16,7 @@ on:
 #       - '**/*.py'
 #       - '**/*.ini'
 #       - '**/*.toml'
-  push:
-    branches:
-      - reference
+  
 #       - release/**
 #     paths:
 #       - '.github/workflows/regression.yml'
